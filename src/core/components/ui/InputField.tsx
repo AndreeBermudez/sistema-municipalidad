@@ -4,7 +4,7 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	label?: string;
 	className?: string;
 	error?: string;
-	disabled?:boolean
+	disabled?: boolean;
 }
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -24,12 +24,11 @@ export const InputField: React.FC<InputFieldProps> = ({
 				placeholder={placeholder}
 				disabled={disabled}
 				className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 
-						${ error ? 'border-red-500 focus:ring-red-200' 
-								 : 'border-gray-300 focus:ring-blue-200'}
-						${ disabled ? 'bg-gray-100' : ''}`}
+						${error ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:ring-blue-200'}
+						${disabled ? 'bg-gray-50' : ''}`}
 				{...rest}
 			/>
-			{error && <span className='text-red-600 text-xs font-semibold'>{error}</span>}
+			<div className='h-1 w-full'>{error && <span className='text-red-600 text-xs font-semibold'>{error}</span>}</div>
 		</div>
 	);
 };
