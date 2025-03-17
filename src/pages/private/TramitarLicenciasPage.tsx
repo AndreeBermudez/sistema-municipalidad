@@ -2,6 +2,7 @@ import { Search } from 'lucide-react';
 import { InputField, SelectField } from '../../core/components/ui';
 import { LicenciaData, ModalTramite, TablaTramite } from '../../features/licencias/componentes';
 import { useActions } from '../../features/licencias/context';
+import { useEffect, useState } from 'react';
 
 const headersTramite = ['Fecha', 'Negocio', 'RUC', 'Estado', 'Acciones'];
 
@@ -26,31 +27,53 @@ const data: LicenciaData[] = [
 	{ id: 18, fecha: '18/01/2023', nombreNegocio: 'Carnicería Fresca', ruc: '89012765432', estado: 'Vigente' },
 	{ id: 19, fecha: '19/01/2023', nombreNegocio: 'Pescadería Mar', ruc: '90123876543', estado: 'Pendiente' },
 	{ id: 20, fecha: '20/01/2023', nombreNegocio: 'Ferretería Herramientas', ruc: '01234987654', estado: 'Vigente' },
-  ];
+];
 
 export const TramitarLicenciasPage = () => {
 	const { isModalOpen } = useActions();
+	const [inputFilter, setInputFilter] = useState('');
+	const [selectOption, setSelectOption] = useState('todos');
+	const [dataFilter, setDataFilter] = useState(data);
+
+	useEffect(() => {
+		const dataFilter = data.filter((item) => {
+			const filterByOption = selectOption === 'todos' || selectOption === item.estado.toLowerCase()
+			const value = inputFilter.toLowerCase();
+			const filterByInput = item.nombreNegocio.toLowerCase().includes(value) || item.ruc.toLowerCase().includes(value);
+			return filterByOption && filterByInput
+		});
+		setDataFilter(dataFilter);
+	}, [inputFilter,selectOption]);
+
 	return (
 		<>
 			<div className='flex gap-4 items-center justify-between bg-blue-600 px-4 py-5 rounded-t-lg'>
 				<h2 className='text-xl md:text-2xl font-bold text-primary text-white'>Tramitar Licencia</h2>
 				<div className='flex gap-4'>
 					<div className='relative'>
-						<InputField name='filtro' placeholder='Buscar...' inputStyles='pl-10 pr-4 py-2 bg-white' />
+						<InputField
+							name='filtro'
+							placeholder='Buscar...'
+							inputStyles='pl-10 pr-4 py-2 bg-white'
+							value={inputFilter}
+							onChange={(e) => setInputFilter(e.target.value)}
+						/>
 						<Search className='h-5 w-5 text-gray-400 absolute left-3 -translate-y-7' />
 					</div>
 					<SelectField
+						value={selectOption}
+						onChange={(e) => setSelectOption(e.target.value)}
 						name='b-estado'
 						className='bg-white text-gray-700'
 						options={[
 							{ value: 'todos', label: 'Todos los estados' },
-							{ value: 'tramite', label: 'En trámite' },
-							{ value: 'finalizado', label: 'Finalizado' },
+							{ value: 'pendiente', label: 'Pendiente' },
+							{ value: 'vigente', label: 'Vigente' },
 						]}></SelectField>
 				</div>
 			</div>
 			<div className='w-full overflow-x-auto '>
-				<TablaTramite headers={headersTramite} data={data} />
+				<TablaTramite headers={headersTramite} data={dataFilter} />
 			</div>
 			{isModalOpen && <ModalTramite />}
 		</>

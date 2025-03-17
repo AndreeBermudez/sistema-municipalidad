@@ -1,8 +1,15 @@
 import { Column, Pagination, Row, Table, TableBody } from '../../../../core/components/common/table';
 import { usePagination } from '../../../../core/components/common/table/usePagination';
 import { useActions } from '../../../../features/licencias/context';
-import { DataRegistro } from '../../../../pages/private/FiltrarLicenciasPage';
 import { LicenciaActions } from '../actions/LicenciaActions';
+
+export type DataRegistro = {
+	id: number;
+	fecha: string;
+	solicitante: string;
+	codigoPago: string;
+	estado: 'Activo' | 'Vencido';
+};
 
 interface TablaRegistroProps {
 	headers: string[];
