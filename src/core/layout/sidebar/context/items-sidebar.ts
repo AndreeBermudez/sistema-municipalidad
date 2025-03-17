@@ -2,13 +2,13 @@ import { CircleCheckBig, FilePlus2, LayoutDashboard, UserCheck } from 'lucide-re
 
 export const menuItems = [
 	{
-		titulo: 'Registrar Codigo',
+		titulo: 'Registrar Solicitante',
 		link: '/admin/registro',
 		icon: UserCheck,
 		isActive: false,
 	},
 	{
-		titulo: 'Registrar Licencia',
+		titulo: 'Filtrar Licencias',
 		link: '/admin/filtrar',
 		icon: FilePlus2,
 		isActive: false,

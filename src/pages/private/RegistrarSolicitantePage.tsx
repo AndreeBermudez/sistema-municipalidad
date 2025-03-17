@@ -1,12 +1,12 @@
+import { CircleCheck, Eraser, LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
-import { CircleCheck, LoaderCircle } from 'lucide-react';
-import { useCiudadanoMutate, useDniMutate } from '../../features/ciudadanos/hooks';
-import { useZonificacionMutate } from '../../features/zonificacion/hooks';
-import { usePagoMutate } from '../../features/pago/hooks';
-import { Ciudadano } from '../../features/ciudadanos/models/types';
 import { Button, InputField } from '../../core/components/ui';
 import { useToast } from '../../core/context';
 import { validateField } from '../../core/utils/validateField';
+import { useCiudadanoMutate, useDniMutate } from '../../features/ciudadanos/hooks';
+import { Ciudadano } from '../../features/ciudadanos/models/types';
+import { usePagoMutate } from '../../features/pago/hooks';
+import { useZonificacionMutate } from '../../features/zonificacion/hooks';
 
 interface LicenseForm extends Ciudadano {
 	codigoPago: string;
@@ -108,10 +108,13 @@ export const RegistrarSolicitantePage: React.FC = () => {
 
 	return (
 		<>
-			<h2 className='text-xl md:text-2xl font-bold text-primary'>Registro de trámite de licencia</h2>
-			<form className='text-sm' onSubmit={handleSubmitForm}>
+			<div className='flex items-center justify-between bg-blue-600 px-4 py-5 rounded-t-lg'>
+				<h2 className='text-xl md:text-2xl font-bold text-primary text-white'>Registro del solicitante</h2>
+			</div>
+			<form className='text-sm px-4 pb-5' onSubmit={handleSubmitForm}>
 				<div className='mb-5 flex items-start gap-5'>
 					<InputField
+						label='Escriba el número de DNI del solicitante'
 						name='dni'
 						placeholder='Ingrese el DNI'
 						value={licenseForm.dni}
@@ -177,12 +180,19 @@ export const RegistrarSolicitantePage: React.FC = () => {
 						error={errors.codigoZonificacion}
 					/>
 				</div>
-				<div className='flex justify-start'>
+				<div className='flex gap-4 justify-end'>
+					<Button
+						type='button'
+						className='border border-gray-300'
+						onClick={() => setLicenseForm(initialLicenseForm)}>
+						Limpiar
+						<Eraser size={18} />
+					</Button>
 					<Button
 						type='submit'
-						className='bg-primary text-white bg-[#1F7EBE]'
+						className='bg-primary text-white bg-blue-700'
 						disabled={!isFormValid || licenseForm.disabled}>
-						Registrar{' '}
+						Registrar
 						{loadindSubmit ? <LoaderCircle className='animate-spin' size={18} /> : <CircleCheck size={18} />}
 					</Button>
 				</div>

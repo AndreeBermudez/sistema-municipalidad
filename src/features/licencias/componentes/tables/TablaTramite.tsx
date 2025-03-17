@@ -1,60 +1,45 @@
-import { Button, TableCell } from '../../../../core/components/ui';
+import { Column, Pagination, Row, Table, TableBody } from '../../../../core/components/common/table';
+import { usePagination } from '../../../../core/components/common/table/usePagination';
 import { useActions } from '../../../../features/licencias/context';
+import { TramiteActions } from '../actions/TramiteActions';
 
-export type Header = {
-	key: string;
-	name: string;
-}
-
-export type Data = {
+export type LicenciaData = {
 	id: number;
 	fecha: string;
-	codZonificacion: string;
-	codPago: string;
-	dni: string;
-	estado: string;
-}
+	nombreNegocio: string
+	ruc: string;
+	estado: 'Pendiente' | 'Vigente';
+};
 
 export interface TablaTramiteProps {
-	headers: Header[];
-	data: Data[];
+	headers: string[];
+	data: LicenciaData[];
 }
+
+const ITEMS_PAGE = 6
 
 export const TablaTramite: React.FC<TablaTramiteProps> = ({ headers, data }) => {
 	const { openModal, downloadTramitarLicencias } = useActions();
+	const { currentPage, currentItems, totalPages, handleChangePage } = usePagination<LicenciaData>({
+		data,
+		itemsPerPage: ITEMS_PAGE,
+	});
 	return (
-		<table className='w-full border border-none text-sm'>
-			<thead className='bg-[#F9FAFB]'>
-				<tr className='font-semibold'>
-					{headers.map((header) => (
-						<TableCell key={header.key}>{header.name}</TableCell>
+		<>
+			<Table headers={headers}>
+				<TableBody>
+					{currentItems.map((row) => (
+						<Row key={row.id}>
+							<Column>{row.fecha}</Column>
+							<Column>{row.nombreNegocio}</Column>
+							<Column>{row.ruc}</Column>
+							<Column>{row.estado}</Column>
+							<TramiteActions estado={row.estado} openModal={openModal} download={downloadTramitarLicencias} />
+						</Row>
 					))}
-				</tr>
-			</thead>
-			<tbody>
-				{data.map((row) => (
-					<tr key={row.id}>
-						<TableCell>{row.fecha}</TableCell>
-						<TableCell>{row.codZonificacion}</TableCell>
-						<TableCell>{row.codPago}</TableCell>
-						<TableCell>{row.dni}</TableCell>
-						<TableCell>{row.estado}</TableCell>
-						<TableCell className='flex justify-center'>
-							{row.estado === 'En trámite' ? (
-								<Button className='bg-[#DBEAFE] text-[#1E3A8A] shadow-md px-[10px] py-[5px]' onClick={openModal}>
-									Completar
-								</Button>
-							) : row.estado === 'Finalizado' ? (
-								<Button
-									className='bg-[#DCFCE7] text-[#16A34A] shadow-md px-[10px] py-[5px]'
-									onClick={downloadTramitarLicencias}>
-									Descargar
-								</Button>
-							) : null}
-						</TableCell>
-					</tr>
-				))}
-			</tbody>
-		</table>
+				</TableBody>
+			</Table>
+			<Pagination currentPage={currentPage} itemsPerPage={ITEMS_PAGE} totalPages={totalPages} onPageChange={handleChangePage} totalItems={data.length} />
+		</>
 	);
 };

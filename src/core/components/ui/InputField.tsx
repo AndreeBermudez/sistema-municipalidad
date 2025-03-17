@@ -3,6 +3,7 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	placeholder?: string;
 	label?: string;
 	className?: string;
+	inputStyles?:string
 	error?: string;
 	disabled?: boolean;
 }
@@ -12,6 +13,7 @@ export const InputField: React.FC<InputFieldProps> = ({
 	placeholder,
 	label,
 	className,
+	inputStyles,
 	error,
 	disabled,
 	...rest
@@ -23,12 +25,12 @@ export const InputField: React.FC<InputFieldProps> = ({
 				name={name}
 				placeholder={placeholder}
 				disabled={disabled}
-				className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 
+				className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 ${inputStyles}
 						${error ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:ring-blue-200'}
 						${disabled ? 'bg-gray-50' : ''}`}
 				{...rest}
 			/>
-			<div className='h-1 w-full'>{error && <span className='text-red-600 text-xs font-semibold'>{error}</span>}</div>
+			{error && <span className='text-red-600 text-xs font-semibold'>{error}</span>}
 		</div>
 	);
 };

@@ -32,7 +32,7 @@ const AdminLayoutContent: React.FC = () => {
 				</header>
 				<section className='flex-1 my-6 mx-6 sm:mx-9 overflow-x-auto'>
 					<ActionsProvider>
-						<div className='w-full bg-white px-10 py-5 rounded-lg shadow-md flex flex-col gap-5 mb-5'>
+						<div className='w-full bg-white rounded-lg shadow-md flex flex-col gap-5'>
 							<Outlet />
 						</div>
 					</ActionsProvider>

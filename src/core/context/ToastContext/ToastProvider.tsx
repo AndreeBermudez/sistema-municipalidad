@@ -34,7 +34,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
 				errorNotification,
 				dowloadNotification,
 			}}>
-			<Toaster richColors position='top-right' style={{ padding: '20px', color: '#1F7EBE' }} />
+			<Toaster richColors position='top-center' style={{ padding: '20px', color: '#1F7EBE' }} />
 			{children}
 		</ToastContext.Provider>
 	);
