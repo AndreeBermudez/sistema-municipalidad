@@ -3,11 +3,28 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { ActionsProvider } from '../../features/licencias/context';
 import { Sidebar } from './sidebar';
 import { SidebarProvider, useSidebarContext } from './sidebar/context/SidebarContext';
+import { useEffect, useState } from 'react';
+import { Loader } from '../components/common/loader/Loader';
 
 const AdminLayoutContent: React.FC = () => {
 	const { handleMenuClick } = useSidebarContext();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
+	const logout = () => {
+		localStorage.removeItem('authToken');
+		localStorage.removeItem('user');
+		navigate('/login');
+	};
 
+	const [isLoading, setIsLoading] = useState(true)
+
+	useEffect(() => {
+	  setTimeout( () => { setIsLoading(false) },1000 )
+	}, []);
+
+	if (isLoading) return (
+		<Loader/>
+	  );
+	  
 	return (
 		<div className='flex'>
 			<Sidebar />
@@ -23,9 +40,10 @@ const AdminLayoutContent: React.FC = () => {
 						</div>
 						<div className='flex items-center space-x-3'>
 							<span className='text-sm text-gray-600'>Salir</span>
-							<div className='rounded-full bg-blue-600 p-2 text-white flex items-center justify-center'
-								 onClick={()=> navigate('/login')}>
-								<LogOutIcon size={20}/>
+							<div
+								className='rounded-full bg-blue-600 p-2 text-white flex items-center justify-center'
+								onClick={logout}>
+								<LogOutIcon size={20} />
 							</div>
 						</div>
 					</div>

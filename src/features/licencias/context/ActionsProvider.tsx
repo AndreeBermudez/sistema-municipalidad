@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useToast } from '../../../core/context'; 
+import { useToast } from '../../../core/context';
 import { toast } from 'sonner';
 import { ActionsContext } from './ActionsContext';
 
@@ -9,6 +9,7 @@ type ActionsProviderProps = {
 
 export const ActionsProvider: React.FC<ActionsProviderProps> = ({ children }) => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [selectedLicenciaId, setSelectedLicenciaId] = useState<number | null>(null);
 	const [code, setCode] = useState<string>('');
 	const { dowloadNotification } = useToast();
 	const [hideInput, setHideInput] = useState(false); //Por mientras para ocultar inputs
@@ -25,6 +26,10 @@ export const ActionsProvider: React.FC<ActionsProviderProps> = ({ children }) =>
 	};
 	const closeModal = () => {
 		setIsModalOpen(false);
+	};
+	const openModalLicense = (id: number) => {
+		setSelectedLicenciaId(id);
+		setIsModalOpen(true);
 	};
 	// Función de descarga para RegistroLicencias
 	const downloadRegistroLicencias = () => {
@@ -51,6 +56,8 @@ export const ActionsProvider: React.FC<ActionsProviderProps> = ({ children }) =>
 				closeModal,
 				downloadTramitarLicencias,
 				downloadRegistroLicencias,
+				openModalLicense,
+				selectedLicenciaId,
 				code,
 				setCode,
 				handleConfirm,

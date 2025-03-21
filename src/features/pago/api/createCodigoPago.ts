@@ -1,5 +1,5 @@
 import { axiosInstance } from "../../../core/config/api/axiosConfig"; 
-import { CodigoPago } from "../models/types";
+import { CodigoPago } from "../models/CodigoPago";
 
 export const createCodigoPago = async (codigoPago: string, ciudadanoId : number): Promise<CodigoPago> => {
     try {

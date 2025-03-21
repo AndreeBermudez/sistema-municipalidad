@@ -3,6 +3,13 @@ export interface AuthUserSignIn {
 	password: string;
 }
 
-export interface AuthResponse {
+export interface User {
+	id: number;
+	email: string;
+	nombre: string;
+	apellido: string;
+}
+
+export interface AuthResponse extends User {
 	token: string;
 }

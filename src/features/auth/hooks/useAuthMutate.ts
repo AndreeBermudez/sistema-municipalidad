@@ -11,7 +11,9 @@ export const useAuthMutate = () => {
 	return useMutation({
 		mutationFn: login,
 		onSuccess: (data) => {
-			localStorage.setItem('authToken', data.token);
+			const {token, ...user} = data
+			localStorage.setItem('authToken', token);
+			localStorage.setItem('user', JSON.stringify(user));
             navigate('/admin/')
             loginNotification()
 		},

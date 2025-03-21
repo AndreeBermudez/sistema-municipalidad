@@ -1,4 +1,3 @@
-
 interface TableProps {
 	children: React.ReactNode;
 	headers: string[];
@@ -13,11 +12,13 @@ export const Table = ({ children, headers }: TableProps) => {
 			<div className='overflow-x-auto'>
 				<table className='bg-gray-100 w-full'>
 					<thead>
-						{headers.map((title, index) => (
-							<th key={index} className={HEADER_STYLE}>
-								{title}
-							</th>
-						))}
+						<tr>
+							{headers.map((title, index) => (
+								<th key={index} className={HEADER_STYLE}>
+									{title}
+								</th>
+							))}
+						</tr>
 					</thead>
 					{children}
 				</table>

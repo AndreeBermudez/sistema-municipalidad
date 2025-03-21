@@ -12,7 +12,9 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-query": "^5.67.2",
+    "@types/jwt-decode": "^2.2.1",
     "axios": "^1.8.2",
+    "jwt-decode": "^4.0.0",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

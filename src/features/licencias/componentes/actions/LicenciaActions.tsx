@@ -3,19 +3,19 @@ import { ColumnActions } from "../../../../core/components/common/table";
 import { ButtonIcon } from "../../../../core/components/ui";
 
 interface LicenciaActionsProps {
-  estado: 'Activo' | 'Vencido';
+  estado: 'activo' | 'vencida';
   onDownload: () => void;
 }
 
 const estadoConfig = {
-  Activo: {
+  activo: {
     Icon: Loader,
     label: 'Pendiente',
     colorIcon: '#1F7EBE',
     colorBg: '#DBEAFE',
     onClick: undefined
   },
-  Vencido: {
+  vencida: {
     Icon: Download,
     label: 'Descargar',
     colorIcon: '#16A34A',

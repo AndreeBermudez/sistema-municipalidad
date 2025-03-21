@@ -90,11 +90,8 @@ export const RegistrarSolicitantePage: React.FC = () => {
 				throw new Error('No se pudo obtener el ID del pago');
 			}
 			await createCodigoZon({
-				estado: 'PENDIENTE',
 				numeroCodigo: codigoZonificacion,
-				ciudadanoDto: {
-					dni: ciudadano.dni,
-				},
+				dniCiudadano: licenseForm.dni,
 			});
 			registroNotification();
 			setLicenseForm(initialLicenseForm);

@@ -1,4 +1,4 @@
-import { CircleCheckBig, FilePlus2, LayoutDashboard, UserCheck } from 'lucide-react';
+import { CircleCheckBig, FilePlus2, UserCheck } from 'lucide-react';
 
 export const menuItems = [
 	{
@@ -19,10 +19,10 @@ export const menuItems = [
 		icon: CircleCheckBig,
 		isActive: false,
 	},
-	{
-		titulo: 'Historial Licencias',
-		link: '/admin/historial',
-		icon: LayoutDashboard,
-		isActive: false,
-	},
+	// {
+	// 	titulo: 'Historial Licencias',
+	// 	link: '/admin/historial',
+	// 	icon: LayoutDashboard,
+	// 	isActive: false,
+	// },
 ];

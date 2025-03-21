@@ -13,7 +13,7 @@ export const Sidebar: React.FC = () => {
 		<>
 			<div
 				className={`
-                md:flex md:flex-col justify-between h-screen bg-white transition-all duration-300 ease-in-out w-20
+                md:flex md:flex-col justify-between h-screen bg-white transition-all duration-300 ease-in-out w-20 
               ${isMobileMenuOpen && isMobile ? 'z-40 fixed top-0 left-0 w-60' : 'hidden'} 
               ${isCollapsed ? 'lg:w-20' : 'lg:w-60'}`}>
 				<section className='flex flex-col items-center'>
@@ -28,7 +28,7 @@ export const Sidebar: React.FC = () => {
 					</div>
 					<div className='flex flex-col w-full'>
 						{menuItems.map((item) => (
-							<Link to={item.link}>
+							<Link to={item.link} key={item.link}>
 								<ButtonSidebar
 									titulo={item.titulo}
 									Icon={item.icon}
