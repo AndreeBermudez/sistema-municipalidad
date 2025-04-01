@@ -8,7 +8,7 @@ export const useCompleteMutate = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: ({ id, data }: { id: number; data: BaseLicense }) =>
-			completeLicense(id, { ...data, trabajadorId: user.id }),
+			completeLicense(id, { ...data, trabajadorId: user.idTrabajador }),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['licencias'] });
 		},

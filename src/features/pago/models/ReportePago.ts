@@ -4,5 +4,5 @@ export interface ReportePago {
 	solicitante: string;
 	dni: string;
 	codigoPago: string;
-	estado: 'activo' | 'vencida';
+	estado: 'ACTIVO' | 'REGISTRADO';
 }

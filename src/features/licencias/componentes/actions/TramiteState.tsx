@@ -18,14 +18,14 @@ export const TramiteState = ({ estado }: { estado: string }) => {
 					icon: <CheckCircle2 className='h-4 w-4 mr-1.5' />,
 					label: 'Vigente',
 				};
-			case 'vencida':
+			case 'REGISTRADO':
 				return {
 					className:
 						'inline-flex items-center px-2.5 py-1 rounded-full bg-red-100 text-red-800 font-medium text-sm',
 					icon: <XCircle className='h-4 w-4 mr-1.5' />,
 					label: 'Vencido',
 				};
-			case 'activo':
+			case 'ACTIVO':
 				return {
 					className:
 						'inline-flex items-center px-2.5 py-1 rounded-full bg-green-100 text-green-800 font-medium text-sm',

@@ -4,7 +4,7 @@ export interface AuthUserSignIn {
 }
 
 export interface User {
-	id: number;
+	idTrabajador: number;
 	email: string;
 	nombre: string;
 	apellido: string;

@@ -50,7 +50,7 @@ export const FiltrarLicenciasPage: React.FC = () => {
 						options={[
 							{ value: 'todos', label: 'Todos los estados' },
 							{ value: 'activo', label: 'Activo' },
-							{ value: 'vencida', label: 'Vencido' },
+							{ value: 'registrado', label: 'Registrado' },
 						]}></SelectField>
 				</div>
 			</div>
